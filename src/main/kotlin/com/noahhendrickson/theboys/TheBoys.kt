@@ -4,7 +4,7 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.properties.Delegates
 
-class TheBoys : JavaPlugin(), Listener {
+class TheBoys : JavaPlugin() {
 
     private var start: Long by Delegates.notNull()
 
