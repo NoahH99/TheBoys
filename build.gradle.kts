@@ -14,6 +14,14 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
+
+    testImplementation("org.junit.jupiter", "junit-jupiter", "5.4.2")
+    testImplementation("io.mockk","mockk","1.11.0")
+    testImplementation("org.assertj", "assertj-core", "3.19.0")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 tasks.withType<Jar> {
