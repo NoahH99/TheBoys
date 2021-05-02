@@ -19,10 +19,17 @@ class TheBoys : JavaPlugin(), Listener {
         saveDefaultConfig()
         reloadConfig()
 
-        val verbose = config.getBoolean("verbose", true)
+        val enabled = config.getBoolean("enabled", true)
+        if (!enabled) super.setEnabled(false)
 
-        server.pluginManager.registerEvents(BlockBreakListener(logger, verbose), this)
+        val verbose = config.getBoolean("verbose", true)
+        enableEvent("enable-random-drops", BlockBreakListener(logger, verbose))
 
         logger.info { "$name loaded in ${System.currentTimeMillis() - start}ms." }
+    }
+
+    private fun enableEvent(path: String, listener: Listener) {
+        val shouldEnable = config.getBoolean(path, false)
+        if (shouldEnable) server.pluginManager.registerEvents(listener, this)
     }
 }

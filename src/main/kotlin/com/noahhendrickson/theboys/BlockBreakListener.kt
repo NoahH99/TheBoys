@@ -40,9 +40,7 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
             return
         }
 
-        if (verbose) {
-            sendLogMessage(player, block.type, material, itemCount)
-        }
+        if (verbose) sendLogMessage(player, block.type, material, itemCount)
     }
 
     /**
@@ -59,7 +57,7 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
     }
 
     /**
-     * Drops n number of given [Material] at the given [Location].
+     * Drops 1-3 of given [Material] at the given [Location].
      *
      * @return the amount of items dropped or -1 if the item could not be dropped.
      */

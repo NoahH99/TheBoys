@@ -1,2 +1,8 @@
+# Should the plugin enable?
+enabled: true
+
 # Should the plugin log what block a person broke and what it turned into to?
 verbose: true
+
+# Should the plugin enabled random item drops?
+enable-random-drops: true
