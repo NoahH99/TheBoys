@@ -27,6 +27,9 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
         event.spawnRandomItem()
     }
 
+    /**
+     * Spawns a random item that can be dropped.
+     */
     private fun BlockBreakEvent.spawnRandomItem() {
         val material = block.getItemToDrop()
         val itemCount = material.dropAt(block.location)
@@ -42,6 +45,10 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
         }
     }
 
+    /**
+     * Gets the associated [Material] from the [table] for the given [Block] or generates a random [Material]
+     * and adds that [Material] to the [table].
+     */
     private fun Block.getItemToDrop(): Material {
         return if (table.containsKey(type)) {
             table.getValue(type)
@@ -51,6 +58,11 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
         }
     }
 
+    /**
+     * Drops n number of given [Material] at the given [Location].
+     *
+     * @return the amount of items dropped or -1 if the item could not be dropped.
+     */
     private fun Material.dropAt(location: Location): Int {
         val item = ItemStack(this)
         val itemCount = Random.nextInt(3) + 1
@@ -64,6 +76,9 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
         return itemCount
     }
 
+    /**
+     * Sends a log message to the console about a player who broke a block and what material it was replaced with.
+     */
     private fun sendLogMessage(player: Player, brokenMaterial: Material, droppedMaterial: Material, itemCount: Int) {
         logger.info {
             "Player '${player.name}' broke '${brokenMaterial.name}' and it dropped '${droppedMaterial.name}'. ($itemCount)"
