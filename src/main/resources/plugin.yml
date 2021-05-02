@@ -1,0 +1,6 @@
+main: com.noahhendrickson.theboys.TheBoys
+name: TheBoys
+version: 0.1.0
+description: A super simple plugin that adds some fun things into Minecraft.
+api-version: 1.16
+author: NoahH99

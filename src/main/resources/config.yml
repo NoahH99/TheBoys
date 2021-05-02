@@ -1,0 +1,2 @@
+# Should the plugin log what block a person broke and what it turned into to?
+verbose: true
