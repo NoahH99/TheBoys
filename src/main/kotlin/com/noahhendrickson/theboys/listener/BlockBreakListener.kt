@@ -1,4 +1,4 @@
-package com.noahhendrickson.theboys
+package com.noahhendrickson.theboys.listener
 
 import org.bukkit.Location
 import org.bukkit.Material
@@ -51,7 +51,13 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
         return if (table.containsKey(type)) {
             table.getValue(type)
         } else {
-            table[type] = materials.random()
+            var material = materials.random()
+
+            while (table.containsKey(material) || table.containsValue(material)) {
+                material = materials.random()
+            }
+
+            table[type] = material
             table.getValue(type)
         }
     }

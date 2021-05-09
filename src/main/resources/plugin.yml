@@ -1,6 +1,15 @@
 main: com.noahhendrickson.theboys.TheBoys
 name: TheBoys
-version: 0.1.0
+version: 0.1.3
 description: A super simple plugin that adds some fun things into Minecraft.
 api-version: 1.16
 author: NoahH99
+commands:
+  transport:
+    description: Transports you to another player.
+    usage: /<command>
+    aliases: [ goto, teleport, tp ]
+  cancel:
+    description: Cancels a pending transportation request.
+    usage: /<command>
+    aliases: [ deny ]

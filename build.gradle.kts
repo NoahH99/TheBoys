@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.noahhendrickson"
-version = "0.1.0"
+version = "0.1.3"
 
 repositories {
     mavenCentral()
@@ -14,6 +14,7 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
 
     testImplementation("org.junit.jupiter", "junit-jupiter", "5.4.2")
     testImplementation("io.mockk","mockk","1.11.0")
