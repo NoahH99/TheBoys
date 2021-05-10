@@ -6,3 +6,6 @@ verbose: true
 
 # Should the plugin enabled random item drops?
 enable-random-drops: true
+
+# Enable transportation commands.
+transportation: true

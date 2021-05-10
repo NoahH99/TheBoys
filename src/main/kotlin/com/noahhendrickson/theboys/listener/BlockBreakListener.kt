@@ -1,5 +1,7 @@
 package com.noahhendrickson.theboys.listener
 
+import com.noahhendrickson.theboys.TheBoys
+import com.noahhendrickson.theboys.extensions.info
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -8,12 +10,13 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import java.util.logging.Logger
 import kotlin.random.Random
 
-class BlockBreakListener(private val logger: Logger, private val verbose: Boolean) : Listener {
+class BlockBreakListener(private val plugin: TheBoys, private val verbose: Boolean) : Listener {
 
-    private val table = HashMap<Material, Material>().withDefault { Material.BARRIER }
+    private val table: MutableMap<Material, Material>
+        get() = plugin.table
+
     private val materials by lazy {
         Material.values()
             .filter { !it.isAir }
@@ -84,7 +87,7 @@ class BlockBreakListener(private val logger: Logger, private val verbose: Boolea
      * Sends a log message to the console about a player who broke a block and what material it was replaced with.
      */
     private fun sendLogMessage(player: Player, brokenMaterial: Material, droppedMaterial: Material, itemCount: Int) {
-        logger.info {
+        plugin.info {
             "Player '${player.name}' broke '${brokenMaterial.name}' and it dropped '${droppedMaterial.name}'. ($itemCount)"
         }
     }

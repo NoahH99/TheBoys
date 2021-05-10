@@ -1,8 +1,12 @@
 package com.noahhendrickson.theboys
 
-import com.noahhendrickson.theboys.command.CancelCommand
-import com.noahhendrickson.theboys.command.TransportationCommand
+import com.noahhendrickson.theboys.command.impl.CancelCommand
+import com.noahhendrickson.theboys.command.impl.MaterialsCommand
+import com.noahhendrickson.theboys.command.impl.PutCommand
+import com.noahhendrickson.theboys.command.impl.TransportCommand
+import com.noahhendrickson.theboys.extensions.info
 import com.noahhendrickson.theboys.listener.BlockBreakListener
+import org.bukkit.Material
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.properties.Delegates
@@ -10,6 +14,7 @@ import kotlin.properties.Delegates
 class TheBoys : JavaPlugin() {
 
     val transportationCountdownTasks: MutableList<Transport> = mutableListOf()
+    val table = HashMap<Material, Material>().withDefault { Material.BARRIER }
 
     private var start: Long by Delegates.notNull()
 
@@ -28,12 +33,19 @@ class TheBoys : JavaPlugin() {
         if (!enabled) super.setEnabled(false)
 
         val verbose = config.getBoolean("verbose", true)
-        if (enableEvent("enable-random-drops", BlockBreakListener(logger, verbose))) {
-            server.getPluginCommand("transport")?.setExecutor(TransportationCommand(this))
-            server.getPluginCommand("cancel")?.setExecutor(CancelCommand(this))
+        if (enableEvent("enable-random-drops", BlockBreakListener(this, verbose))) {
+            server.getPluginCommand("materials")?.setExecutor(MaterialsCommand(this))
+            server.getPluginCommand("put")?.setExecutor(PutCommand(this))
+
         }
 
-        logger.info { "$name loaded in ${System.currentTimeMillis() - start}ms." }
+        val shouldEnable = config.getBoolean("transportation", false)
+        if (shouldEnable) {
+            server.getPluginCommand("cancel")?.setExecutor(CancelCommand(this))
+            server.getPluginCommand("transport")?.setExecutor(TransportCommand(this))
+        }
+
+        info { "$name loaded in ${System.currentTimeMillis() - start}ms." }
     }
 
     private fun enableEvent(path: String, listener: Listener): Boolean {

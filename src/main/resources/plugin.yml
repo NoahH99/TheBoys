@@ -1,7 +1,7 @@
 main: com.noahhendrickson.theboys.TheBoys
 name: TheBoys
 version: 0.1.3
-description: A super simple plugin that adds some fun things into Minecraft.
+description: A simple plugin that adds some fun things into Minecraft.
 api-version: 1.16
 author: NoahH99
 commands:
@@ -13,3 +13,9 @@ commands:
     description: Cancels a pending transportation request.
     usage: /<command>
     aliases: [ deny ]
+  put:
+    description: Puts a key and value into the random dropped materials table.
+    usage: /<command>
+  materials:
+    description: Lists all values in the random dropped materials table.
+    usage: /<command>
